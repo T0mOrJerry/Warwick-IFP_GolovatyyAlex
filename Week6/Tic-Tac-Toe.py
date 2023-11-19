@@ -34,7 +34,8 @@ class GameWindow(Tk):
                                 width=10)
         self.canvas.create_line(0, self.canvas_height // 3 * 2 + 5, self.canvas_width, self.canvas_height // 3 * 2 + 5,
                                 width=10)
-        self.lbl.configure(text=f"It's {self.turn} turn")
+        self.turn = 'Cross'
+        self.lbl.configure(text=f"It's {self.turn} turn", fg='black')
         self.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     def cross(self, x, y):
@@ -63,6 +64,7 @@ class GameWindow(Tk):
                                     self.canvas_height // 3 * (j + 1) - randint(3, 12),
                                     width=randint(7, 9), fill='red')
             self.turn = 'Nought'
+            self.lbl.configure(text=f"It's {self.turn} turn", fg='black')
 
     def noughts(self, x, y):
         if x <= self.canvas_width // 3:
@@ -85,9 +87,35 @@ class GameWindow(Tk):
                                     self.canvas_height // 3 * (j + 1) - randint(3, 12),
                                     width=randint(6, 8), outline='green')
             self.turn = 'Cross'
+            self.lbl.configure(text=f"It's {self.turn} turn", fg='black')
 
     def check(self, flag):
-        pass
+        for i in range(len(self.board)):
+            if sum(self.board[i]) == 3 * flag:
+                self.canvas.create_line(self.canvas_width / 3 * i + self.canvas_width / 6, 0,
+                                        self.canvas_width / 3 * i + self.canvas_width / 6, self.canvas_height,
+                                        width=randint(8, 11), fill='blue')
+                self.board = [[3, 3, 3], [3, 3, 3], [3, 3, 3]]
+                return True
+        for i in range(3):
+            if self.board[0][i] + self.board[1][i] + self.board[2][i] == 3 * flag:
+                self.canvas.create_line(0, self.canvas_height / 3 * i + self.canvas_height / 6,
+                                        self.canvas_width, self.canvas_height / 3 * i + self.canvas_height / 6,
+                                        width=randint(8, 11), fill='blue')
+                self.board = [[3, 3, 3], [3, 3, 3], [3, 3, 3]]
+                return True
+        if self.board[0][0] + self.board[1][1] + self.board[2][2] == 3 * flag:
+            self.canvas.create_line(0, 0,
+                                    self.canvas_width, self.canvas_height,
+                                    width=randint(8, 11), fill='blue')
+            self.board = [[3, 3, 3], [3, 3, 3], [3, 3, 3]]
+            return True
+        if self.board[0][2] + self.board[1][1] + self.board[2][0] == 3 * flag:
+            self.canvas.create_line(self.canvas_width, 0,
+                                    0, self.canvas_height,
+                                    width=randint(8, 11), fill='blue')
+            self.board = [[3, 3, 3], [3, 3, 3], [3, 3, 3]]
+            return True
 
     def click(self, event):
         x = event.x
@@ -101,11 +129,12 @@ class GameWindow(Tk):
         else:
             if self.turn == 'Cross':
                 self.cross(x, y)
-                self.check(1)
+                if self.check(1):
+                    self.lbl.configure(text=f"Crosses Win!", fg='red')
             else:
                 self.noughts(x, y)
-                self.check(-1)
-            self.lbl.configure(text=f"It's {self.turn} turn")
+                if self.check(-1):
+                    self.lbl.configure(text=f"Noughts Win!", fg='green')
 
 
 if __name__ == "__main__":
