@@ -1,23 +1,5 @@
-while True:
-    a = int(input())
-    if a == 1:
-        print('Monday')
-        break
-    elif a == 2:
-        print('Tuesday')
-        break
-    elif a == 3:
-        print('Wednesday')
-        break
-    elif a == 4:
-        print('Thursday')
-        break
-    elif a == 5:
-        print('Friday')
-        break
-    elif a == 6:
-        print('Saturday')
-        break
-    elif a == 7:
-        print('Sunday')
-        break
+try:  # Do this in case of an incorrect input
+    li = [int(input()) for i in range(3)]  # With list generator create list with 3 inputted values
+    print(max(li))
+except ValueError:
+    print('Stop crushing my program!!')

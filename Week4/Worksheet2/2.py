@@ -7,5 +7,5 @@ try:  # Do this in case of an incorrect input
         print(f'{a} = {b}')
     else:
         print(f'{max(a, b)} > {min(a, b)}')
-except Exception:
+except ValueError:
     print('Something went wrong - try again')

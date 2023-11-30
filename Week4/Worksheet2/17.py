@@ -1,32 +1,11 @@
-while True:
-    a = int(input())
-    if a == 1:
-        print('one')
-        break
-    elif a == 2:
-        print('two')
-        break
-    elif a == 3:
-        print('three')
-        break
-    elif a == 4:
-        print('four')
-        break
-    elif a == 5:
-        print('five')
-        break
-    elif a == 6:
-        print('six')
-        break
-    elif a == 7:
-        print('seven')
-        break
-    elif a == 8:
-        print('eight')
-        break
-    elif a == 9:
-        print('nine')
-        break
-    elif a == 0:
-        print('zero')
-        break
+try:  # Do this in case of an incorrect input
+    math = int(input('Input your math mark: '))
+    physics = int(input('Input your physics mark: '))
+    chemistry = int(input('Input your chemistry mark: '))
+    #  If statement with a whole condition
+    if (math >= 65 and physics >= 55 and chemistry >= 50) and (math + physics + chemistry >= 190 or math + physics):
+        print('You r accepted')
+    else:
+        print('Study harder')
+except ValueError:
+    print('Stop crushing my program!!')

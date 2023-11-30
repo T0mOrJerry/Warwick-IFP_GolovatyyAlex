@@ -12,5 +12,5 @@ try:  # Do this in case of an incorrect input
         print(f'{name} has a resit')
     else:
         print(f'{name} is Failed')
-except Exception:
+except ValueError:
     print('Something went wrong - try again')
