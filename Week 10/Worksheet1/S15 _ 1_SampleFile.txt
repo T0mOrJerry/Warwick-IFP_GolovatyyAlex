@@ -1,0 +1,3 @@
+Example text file saved with a .txt extension.
+This is line 2 of the file.
+If I add this, then I have a total of 3 lines in my file.
