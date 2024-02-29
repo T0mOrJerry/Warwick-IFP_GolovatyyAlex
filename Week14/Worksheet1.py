@@ -32,8 +32,6 @@ def tree_creation():
     return tree
 
 
-
-
 def preorder(root_node):
     current = root_node
     if current is None:
